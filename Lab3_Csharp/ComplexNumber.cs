@@ -11,14 +11,17 @@ namespace Lab3_Csharp
         private readonly double realPart;  // поля класса действительная и мнимая часть
         private readonly double imaginaryPart;
 
+        public double RealPart => realPart;
+        public double ImaginaryPart => imaginaryPart;
+
         public double GetComplexNumberModule()  // метод расчета модуля комплекного числа 
         {
-            return Math.Sqrt(Math.Pow(realPart, 2) + Math.Pow(imaginaryPart, 2));
+            return Math.Sqrt(Math.Pow(RealPart, 2) + Math.Pow(ImaginaryPart, 2));
         }
 
         public double GetComplexNumberArgument()  // метод расчета аргумента комплексного числа
         {
-            return Math.Acos(realPart / Math.Sqrt(Math.Pow(realPart, 2) + Math.Pow(imaginaryPart, 2)));
+            return Math.Acos(RealPart / Math.Sqrt(Math.Pow(RealPart, 2) + Math.Pow(ImaginaryPart, 2)));
         }
 
         public ComplexNumber GetComplexNumberSqrt(double power)  // метод расчета корня н-ной степени комплексного числа 
@@ -32,25 +35,25 @@ namespace Lab3_Csharp
             return new ComplexNumber(realPart, imaginaryPart);
         }
 
-        public string Output()  // метод вывода вектора 
+        public override string ToString()
         {
-            return (realPart + " + " + imaginaryPart + "i").ToString();
+            return (RealPart + " + " + ImaginaryPart + "i").ToString();
         }
 
         public static ComplexNumber operator +(ComplexNumber arg1, ComplexNumber arg2)  // перегрузка сложения
         {
-            return new ComplexNumber(arg1.realPart + arg2.realPart, arg1.imaginaryPart + arg2.imaginaryPart);
+            return new ComplexNumber(arg1.RealPart + arg2.RealPart, arg1.ImaginaryPart + arg2.ImaginaryPart);
         }
 
         public static ComplexNumber operator -(ComplexNumber arg1, ComplexNumber arg2)  // перегрузка вычитания
         {
-            return new ComplexNumber(arg1.realPart - arg2.realPart, arg1.imaginaryPart - arg2.imaginaryPart);
+            return new ComplexNumber(arg1.RealPart - arg2.RealPart, arg1.ImaginaryPart - arg2.ImaginaryPart);
         }
 
         public static ComplexNumber operator *(ComplexNumber arg1, ComplexNumber arg2)  // перегрузка умножения
         {
-            return new ComplexNumber((arg1.realPart * arg2.realPart) - (arg1.imaginaryPart * arg2.imaginaryPart),
-                (arg1.realPart * arg2.imaginaryPart) + (arg2.realPart * arg1.imaginaryPart));
+            return new ComplexNumber((arg1.RealPart * arg2.RealPart) - (arg1.ImaginaryPart * arg2.ImaginaryPart),
+                (arg1.RealPart * arg2.ImaginaryPart) + (arg2.RealPart * arg1.ImaginaryPart));
         }
 
         public static ComplexNumber operator /(ComplexNumber arg1, ComplexNumber arg2)  // перегрузка деления
@@ -60,7 +63,7 @@ namespace Lab3_Csharp
 
         public static ComplexNumber operator ++(ComplexNumber arg)  // перегрузка увеличения действительной и мнимой части на 1
         {
-            return new ComplexNumber(arg.realPart + 1, arg.imaginaryPart + 1);
+            return new ComplexNumber(arg.RealPart + 1, arg.ImaginaryPart + 1);
         }
 
         public ComplexNumber(double realPart, double imaginaryPart)  // конструктор 
